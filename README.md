@@ -1,0 +1,1 @@
+This is an adaptation of [Phil Plait](https://twitter.com/BadAstronomer)'s Solar System Scale [spreadsheet](https://docs.google.com/spreadsheets/d/1m6-SH0mShxxSnHFVYERLw9J7ajs0GftG54QdRuI69hc) presented in an article at [Syfy](http://www.syfy.com/syfywire/scaling-the-solar-system).
