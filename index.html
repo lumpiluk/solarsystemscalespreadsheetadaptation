@@ -12385,6 +12385,12 @@ div#notebook {
 <span class="sd">        new_diameter (float): New size of the object&#39;s reference</span>
 <span class="sd">            property in meters.            </span>
 <span class="sd">            Default: 0.1 meters for the Sun.</span>
+<span class="sd">        reference (str): What to scale.</span>
+<span class="sd">            Must be either of the following:</span>
+<span class="sd">            &#39;radius&#39;, &#39;diameter&#39;, &#39;distance_from_sun&#39;, or</span>
+<span class="sd">            some other numerical column previously added to</span>
+<span class="sd">            the solar_system DataFrame.</span>
+<span class="sd">            Default: &#39;radius&#39;</span>
 <span class="sd">        reference_object (str): Reference object for the new size.</span>
 <span class="sd">            Must be either of the following:</span>
 <span class="sd">            &quot;Sun&quot;, &quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;, &quot;Mars&quot;, &quot;Jupiter&quot;,</span>
