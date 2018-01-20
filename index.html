@@ -11763,7 +11763,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -11780,6 +11780,8 @@ div#notebook {
         <span class="k">return</span> <span class="n">distance</span>  <span class="c1"># In this case distance probably isn&#39;t actually a distance.</span>
     <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;0 m&quot;</span>  <span class="c1"># Would be covered by log10(d) &lt; 3, but log10(0) throws an error.</span>
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{:,.3e}</span><span class="s2"> nm&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{:,.2f}</span><span class="s2"> μm&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
@@ -11807,9 +11809,10 @@ div#notebook {
                           <span class="mf">1.43e+12</span><span class="p">,</span> <span class="mf">2.87e+12</span><span class="p">,</span> <span class="mf">4.5e+12</span><span class="p">,</span> <span class="mf">5.91e+12</span><span class="p">,</span> <span class="mf">4.5e+12</span><span class="p">,</span>
                           <span class="mf">7.5e+12</span><span class="p">,</span> <span class="mf">4.07e+16</span><span class="p">]</span>
 <span class="p">})</span>
+<span class="n">solar_system</span><span class="p">[</span><span class="s1">&#39;diameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_system</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
 
 <span class="c1"># Reorder columns because Python dicts aren&#39;t sorted by keys:</span>
-<span class="n">solar_system</span> <span class="o">=</span> <span class="n">solar_system</span><span class="p">[[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="s1">&#39;distance_from_sun&#39;</span><span class="p">]]</span>
+<span class="n">solar_system</span> <span class="o">=</span> <span class="n">solar_system</span><span class="p">[[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="s1">&#39;distance_from_sun&#39;</span><span class="p">]]</span>
 
 <span class="n">solar_system</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_distance</span><span class="p">)</span>
 </pre></div>
@@ -11829,7 +11832,7 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[53]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
@@ -11838,7 +11841,7 @@ div#notebook {
         
         </style>
 
-        <table id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3" None>
+        <table id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3" None>
         
 
         <thead>
@@ -11862,6 +11865,11 @@ div#notebook {
                 
                 
                 <th class="col_heading level0 col2" colspan=1>
+                  diameter
+                
+                
+                
+                <th class="col_heading level0 col3" colspan=1>
                   distance_from_sun
                 
                 
@@ -11873,26 +11881,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row0" rowspan=1>
                     0
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row0_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row0_col0"
                  class="data row0 col0" >
                     Sun
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row0_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row0_col1"
                  class="data row0 col1" >
                     695,000.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row0_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row0_col2"
                  class="data row0 col2" >
+                    1,390,000.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row0_col3"
+                 class="data row0 col3" >
                     0 m
                 
                 
@@ -11901,26 +11915,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row1" rowspan=1>
                     1
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row1_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row1_col0"
                  class="data row1 col0" >
                     Mercury
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row1_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row1_col1"
                  class="data row1 col1" >
                     2,440.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row1_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row1_col2"
                  class="data row1 col2" >
+                    4,880.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row1_col3"
+                 class="data row1 col3" >
                     57,900,000.00 km
                 
                 
@@ -11929,26 +11949,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row2" rowspan=1>
                     2
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row2_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row2_col0"
                  class="data row2 col0" >
                     Venus
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row2_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row2_col1"
                  class="data row2 col1" >
                     6,052.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row2_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row2_col2"
                  class="data row2 col2" >
+                    12,104.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row2_col3"
+                 class="data row2 col3" >
                     108,000,000.00 km
                 
                 
@@ -11957,26 +11983,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row3" rowspan=1>
                     3
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row3_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row3_col0"
                  class="data row3 col0" >
                     Earth
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row3_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row3_col1"
                  class="data row3 col1" >
                     6,378.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row3_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row3_col2"
                  class="data row3 col2" >
+                    12,756.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row3_col3"
+                 class="data row3 col3" >
                     1.00 AU
                 
                 
@@ -11985,26 +12017,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row4" rowspan=1>
                     4
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row4_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row4_col0"
                  class="data row4 col0" >
                     Mars
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row4_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row4_col1"
                  class="data row4 col1" >
                     3,397.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row4_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row4_col2"
                  class="data row4 col2" >
+                    6,794.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row4_col3"
+                 class="data row4 col3" >
                     1.52 AU
                 
                 
@@ -12013,26 +12051,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row5" rowspan=1>
                     5
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row5_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row5_col0"
                  class="data row5 col0" >
                     Jupiter
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row5_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row5_col1"
                  class="data row5 col1" >
                     71,492.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row5_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row5_col2"
                  class="data row5 col2" >
+                    142,984.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row5_col3"
+                 class="data row5 col3" >
                     5.20 AU
                 
                 
@@ -12041,26 +12085,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row6" rowspan=1>
                     6
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row6_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row6_col0"
                  class="data row6 col0" >
                     Saturn
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row6_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row6_col1"
                  class="data row6 col1" >
                     60,268.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row6_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row6_col2"
                  class="data row6 col2" >
+                    120,536.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row6_col3"
+                 class="data row6 col3" >
                     9.56 AU
                 
                 
@@ -12069,26 +12119,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row7" rowspan=1>
                     7
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row7_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row7_col0"
                  class="data row7 col0" >
                     Uranus
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row7_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row7_col1"
                  class="data row7 col1" >
                     25,559.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row7_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row7_col2"
                  class="data row7 col2" >
+                    51,118.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row7_col3"
+                 class="data row7 col3" >
                     19.18 AU
                 
                 
@@ -12097,26 +12153,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row8" rowspan=1>
                     8
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row8_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row8_col0"
                  class="data row8 col0" >
                     Neptune
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row8_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row8_col1"
                  class="data row8 col1" >
                     24,766.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row8_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row8_col2"
                  class="data row8 col2" >
+                    49,532.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row8_col3"
+                 class="data row8 col3" >
                     30.08 AU
                 
                 
@@ -12125,26 +12187,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row9" rowspan=1>
                     9
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row9_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row9_col0"
                  class="data row9 col0" >
                     Pluto
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row9_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row9_col1"
                  class="data row9 col1" >
                     1,150.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row9_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row9_col2"
                  class="data row9 col2" >
+                    2,300.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row9_col3"
+                 class="data row9 col3" >
                     39.51 AU
                 
                 
@@ -12153,26 +12221,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row10" rowspan=1>
                     10
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row10_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row10_col0"
                  class="data row10 col0" >
                     Kuiper Belt inner edge
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row10_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row10_col1"
                  class="data row10 col1" >
                     0 m
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row10_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row10_col2"
                  class="data row10 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row10_col3"
+                 class="data row10 col3" >
                     30.08 AU
                 
                 
@@ -12181,26 +12255,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row11" rowspan=1>
                     11
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row11_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row11_col0"
                  class="data row11 col0" >
                     Kuiper Belt outer edge
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row11_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row11_col1"
                  class="data row11 col1" >
                     0 m
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row11_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row11_col2"
                  class="data row11 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row11_col3"
+                 class="data row11 col3" >
                     50.13 AU
                 
                 
@@ -12209,26 +12289,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3"
+                <th id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row12" rowspan=1>
                     12
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row12_col0"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row12_col0"
                  class="data row12 col0" >
                     Alpha Centauri
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row12_col1"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row12_col1"
                  class="data row12 col1" >
                     847,900.00 km
                 
                 
                 
-                <td id="T_a47a80f2_fd63_11e7_b18f_5fce9d87fcb3row12_col2"
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row12_col2"
                  class="data row12 col2" >
+                    1,695,800.00 km
+                
+                
+                
+                <td id="T_18175f82_fdcb_11e7_b18f_5fce9d87fcb3row12_col3"
+                 class="data row12 col3" >
                     4.30 ly
                 
                 
@@ -12247,41 +12333,53 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scale_solar_system</span><span class="p">(</span><span class="n">new_diameter</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Sun&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Scale the solar system in reference to one of the available celestial bodies.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scale_solar_system</span><span class="p">(</span>
+        <span class="n">new_size</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span>
+        <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Sun&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale the solar system in reference to the diameter of</span>
+<span class="sd">    one of the available celestial bodies.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        new_diameter (float): New size of the referenze object in meters. Default: 0.1 meters for the Sun.</span>
-<span class="sd">        reference_object: Reference object to scale. Must be either of the following:</span>
-<span class="sd">            &quot;Sun&quot;, &quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;, &quot;Mars&quot;, &quot;Jupiter&quot;, &quot;Saturn&quot;,</span>
-<span class="sd">            &quot;Uranus&quot;, &quot;Neptune&quot;, &quot;Pluto&quot;, &quot;Kuiper Belt inner edge&quot;,</span>
-<span class="sd">            &quot;Kuiper Belt outer edge&quot;, &quot;Alpha Centauri&quot;.</span>
+<span class="sd">        new_diameter (float): New size of the object&#39;s reference</span>
+<span class="sd">            property in meters.            </span>
+<span class="sd">            Default: 0.1 meters for the Sun.</span>
+<span class="sd">        reference_object (str): Reference object for the new size.</span>
+<span class="sd">            Must be either of the following:</span>
+<span class="sd">            &quot;Sun&quot;, &quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;, &quot;Mars&quot;, &quot;Jupiter&quot;,</span>
+<span class="sd">            &quot;Saturn&quot;, &quot;Uranus&quot;, &quot;Neptune&quot;, &quot;Pluto&quot;,</span>
+<span class="sd">            &quot;Kuiper Belt inner edge&quot;, &quot;Kuiper Belt outer edge&quot;,</span>
+<span class="sd">            &quot;Alpha Centauri&quot;.</span>
 <span class="sd">            Default: &quot;Sun&quot;</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
-<span class="sd">        Pandas DataFrame containing the original scales of the solar system in the columns</span>
-<span class="sd">        &#39;object&#39;, &#39;radius&#39;, and &#39;distance_from_sun&#39;, as well as the scaled distances for</span>
-<span class="sd">        &#39;unit_radius&#39;, &#39;unit_distance_from_sun&#39;, &#39;radius_scaled&#39;, &#39;diameter_scaled&#39;, and</span>
+<span class="sd">        Pandas DataFrame containing the original scales of the solar</span>
+<span class="sd">        system in the columns &#39;object&#39;, &#39;radius&#39;, and</span>
+<span class="sd">        &#39;distance_from_sun&#39;, as well as the scaled distances for</span>
+<span class="sd">        &#39;radius_scaled&#39;, &#39;diameter_scaled&#39;, and</span>
 <span class="sd">        &#39;distance_from_sun_scaled&#39;.</span>
-<span class="sd">        </span>
-<span class="sd">        If reference_object is &quot;Sun&quot;, then for the Sun unit_radius will be equal to 1.0.</span>
-<span class="sd">        unit_distance_from_sun is distance from sun in therms of the radius of the reference_object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">scaled</span> <span class="o">=</span> <span class="n">solar_system</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">reference_object_radius</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">reference_object</span><span class="p">][</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;unit_radius&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">reference_object_radius</span>
-    <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;unit_distance_from_sun&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;distance_from_sun&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">reference_object_radius</span>
-    <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;radius_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;unit_radius&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">new_diameter</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;diameter_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;radius_scaled&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
-    <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;distance_from_sun_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[</span><span class="s1">&#39;unit_distance_from_sun&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">new_diameter</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">scaled</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">solar_system</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">original_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span> <span class="o">==</span>
+        <span class="n">reference_object</span><span class="p">][</span><span class="n">reference</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">new_size</span> <span class="o">/</span> <span class="n">original_size</span>
+    
+    <span class="n">s</span><span class="p">[</span><span class="s1">&#39;radius_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_factor</span>
+    <span class="n">s</span><span class="p">[</span><span class="s1">&#39;diameter_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;radius_scaled&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">s</span><span class="p">[</span><span class="s1">&#39;distance_from_sun_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;distance_from_sun&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_factor</span>
+    
+    <span class="k">return</span> <span class="n">s</span>
 
 
 <span class="k">def</span> <span class="nf">show_scaled_with_jupyter</span><span class="p">(</span><span class="n">scaled</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">scaled</span><span class="p">[[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter_scaled&#39;</span><span class="p">,</span> <span class="s1">&#39;distance_from_sun_scaled&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_distance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">scaled</span><span class="p">[[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;radius_scaled&#39;</span><span class="p">,</span> <span class="s1">&#39;diameter_scaled&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;distance_from_sun_scaled&#39;</span><span class="p">]]</span>
+            <span class="o">.</span><span class="n">style</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_distance</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12300,10 +12398,15 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sss_sun</span> <span class="o">=</span> <span class="n">scale_solar_system</span><span class="p">(</span><span class="n">new_diameter</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Sun&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scale the solar system such that the Sun has a diameter of 10 cm.</span>
+<span class="n">sss_sun</span> <span class="o">=</span> <span class="n">scale_solar_system</span><span class="p">(</span>
+    <span class="n">new_size</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span>
+    <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Sun&#39;</span>
+<span class="p">)</span>
 <span class="n">show_scaled_with_jupyter</span><span class="p">(</span><span class="n">sss_sun</span><span class="p">)</span>
 </pre></div>
 
@@ -12315,7 +12418,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[60]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
@@ -12324,7 +12427,7 @@ div#notebook {
         
         </style>
 
-        <table id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3" None>
+        <table id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3" None>
         
 
         <thead>
@@ -12343,11 +12446,16 @@ div#notebook {
                 
                 
                 <th class="col_heading level0 col1" colspan=1>
-                  diameter_scaled
+                  radius_scaled
                 
                 
                 
                 <th class="col_heading level0 col2" colspan=1>
+                  diameter_scaled
+                
+                
+                
+                <th class="col_heading level0 col3" colspan=1>
                   distance_from_sun_scaled
                 
                 
@@ -12359,26 +12467,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row0" rowspan=1>
                     0
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row0_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row0_col0"
                  class="data row0 col0" >
                     Sun
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row0_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row0_col1"
                  class="data row0 col1" >
+                    5.00 cm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row0_col2"
+                 class="data row0 col2" >
                     10.00 cm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row0_col2"
-                 class="data row0 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row0_col3"
+                 class="data row0 col3" >
                     0 m
                 
                 
@@ -12387,26 +12501,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row1" rowspan=1>
                     1
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row1_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row1_col0"
                  class="data row1 col0" >
                     Mercury
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row1_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row1_col1"
                  class="data row1 col1" >
+                    175.54 μm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row1_col2"
+                 class="data row1 col2" >
                     351.08 μm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row1_col2"
-                 class="data row1 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row1_col3"
+                 class="data row1 col3" >
                     4.17 m
                 
                 
@@ -12415,26 +12535,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row2" rowspan=1>
                     2
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row2_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row2_col0"
                  class="data row2 col0" >
                     Venus
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row2_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row2_col1"
                  class="data row2 col1" >
+                    435.40 μm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row2_col2"
+                 class="data row2 col2" >
                     870.79 μm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row2_col2"
-                 class="data row2 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row2_col3"
+                 class="data row2 col3" >
                     7.77 m
                 
                 
@@ -12443,26 +12569,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row3" rowspan=1>
                     3
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row3_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row3_col0"
                  class="data row3 col0" >
                     Earth
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row3_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row3_col1"
                  class="data row3 col1" >
+                    458.85 μm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row3_col2"
+                 class="data row3 col2" >
                     917.70 μm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row3_col2"
-                 class="data row3 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row3_col3"
+                 class="data row3 col3" >
                     10.79 m
                 
                 
@@ -12471,26 +12603,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row4" rowspan=1>
                     4
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row4_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row4_col0"
                  class="data row4 col0" >
                     Mars
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row4_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row4_col1"
                  class="data row4 col1" >
+                    244.39 μm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row4_col2"
+                 class="data row4 col2" >
                     488.78 μm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row4_col2"
-                 class="data row4 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row4_col3"
+                 class="data row4 col3" >
                     16.40 m
                 
                 
@@ -12499,26 +12637,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row5" rowspan=1>
                     5
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row5_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row5_col0"
                  class="data row5 col0" >
                     Jupiter
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row5_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row5_col1"
                  class="data row5 col1" >
+                    5.14 mm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row5_col2"
+                 class="data row5 col2" >
                     1.03 cm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row5_col2"
-                 class="data row5 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row5_col3"
+                 class="data row5 col3" >
                     55.97 m
                 
                 
@@ -12527,26 +12671,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row6" rowspan=1>
                     6
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row6_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row6_col0"
                  class="data row6 col0" >
                     Saturn
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row6_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row6_col1"
                  class="data row6 col1" >
+                    4.34 mm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row6_col2"
+                 class="data row6 col2" >
                     8.67 mm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row6_col2"
-                 class="data row6 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row6_col3"
+                 class="data row6 col3" >
                     102.88 m
                 
                 
@@ -12555,26 +12705,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row7" rowspan=1>
                     7
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row7_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row7_col0"
                  class="data row7 col0" >
                     Uranus
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row7_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row7_col1"
                  class="data row7 col1" >
+                    1.84 mm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row7_col2"
+                 class="data row7 col2" >
                     3.68 mm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row7_col2"
-                 class="data row7 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row7_col3"
+                 class="data row7 col3" >
                     206.47 m
                 
                 
@@ -12583,26 +12739,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row8" rowspan=1>
                     8
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row8_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row8_col0"
                  class="data row8 col0" >
                     Neptune
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row8_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row8_col1"
                  class="data row8 col1" >
+                    1.78 mm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row8_col2"
+                 class="data row8 col2" >
                     3.56 mm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row8_col2"
-                 class="data row8 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row8_col3"
+                 class="data row8 col3" >
                     323.74 m
                 
                 
@@ -12611,26 +12773,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row9" rowspan=1>
                     9
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row9_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row9_col0"
                  class="data row9 col0" >
                     Pluto
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row9_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row9_col1"
                  class="data row9 col1" >
+                    82.73 μm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row9_col2"
+                 class="data row9 col2" >
                     165.47 μm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row9_col2"
-                 class="data row9 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row9_col3"
+                 class="data row9 col3" >
                     425.18 m
                 
                 
@@ -12639,26 +12807,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row10" rowspan=1>
                     10
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row10_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row10_col0"
                  class="data row10 col0" >
                     Kuiper Belt inner edge
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row10_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row10_col1"
                  class="data row10 col1" >
                     0 m
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row10_col2"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row10_col2"
                  class="data row10 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row10_col3"
+                 class="data row10 col3" >
                     323.74 m
                 
                 
@@ -12667,26 +12841,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row11" rowspan=1>
                     11
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row11_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row11_col0"
                  class="data row11 col0" >
                     Kuiper Belt outer edge
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row11_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row11_col1"
                  class="data row11 col1" >
                     0 m
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row11_col2"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row11_col2"
                  class="data row11 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row11_col3"
+                 class="data row11 col3" >
                     539.57 m
                 
                 
@@ -12695,26 +12875,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row12" rowspan=1>
                     12
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row12_col0"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row12_col0"
                  class="data row12 col0" >
                     Alpha Centauri
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row12_col1"
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row12_col1"
                  class="data row12 col1" >
+                    6.10 cm
+                
+                
+                
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row12_col2"
+                 class="data row12 col2" >
                     12.20 cm
                 
                 
                 
-                <td id="T_5df03e28_fd64_11e7_b18f_5fce9d87fcb3row12_col2"
-                 class="data row12 col2" >
+                <td id="T_1a8fdb4a_fdcb_11e7_b18f_5fce9d87fcb3row12_col3"
+                 class="data row12 col3" >
                     2,928.06 km
                 
                 
@@ -12736,16 +12922,20 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-if-the-Earth-Were-the-Size-of-a-Marble?">What if the <em>Earth</em> Were the Size of a <em>Marble</em>?<a class="anchor-link" href="#What-if-the-Earth-Were-the-Size-of-a-Marble?">&#182;</a></h3>
+<h3 id="What-if-the-Earth-Were-the-Size-of-a-Marble?">What if the Earth Were the Size of a Marble?<a class="anchor-link" href="#What-if-the-Earth-Were-the-Size-of-a-Marble?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sss_earth_marble</span> <span class="o">=</span> <span class="n">scale_solar_system</span><span class="p">(</span><span class="n">new_diameter</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Earth&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sss_earth_marble</span> <span class="o">=</span> <span class="n">scale_solar_system</span><span class="p">(</span>
+    <span class="n">new_size</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span>
+    <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Earth&#39;</span>
+<span class="p">)</span>
 <span class="n">show_scaled_with_jupyter</span><span class="p">(</span><span class="n">sss_earth_marble</span><span class="p">)</span>
 </pre></div>
 
@@ -12757,7 +12947,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[61]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
@@ -12766,7 +12956,7 @@ div#notebook {
         
         </style>
 
-        <table id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3" None>
+        <table id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3" None>
         
 
         <thead>
@@ -12785,11 +12975,16 @@ div#notebook {
                 
                 
                 <th class="col_heading level0 col1" colspan=1>
-                  diameter_scaled
+                  radius_scaled
                 
                 
                 
                 <th class="col_heading level0 col2" colspan=1>
+                  diameter_scaled
+                
+                
+                
+                <th class="col_heading level0 col3" colspan=1>
                   distance_from_sun_scaled
                 
                 
@@ -12801,26 +12996,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row0" rowspan=1>
                     0
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row0_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row0_col0"
                  class="data row0 col0" >
                     Sun
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row0_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row0_col1"
                  class="data row0 col1" >
+                    54.48 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row0_col2"
+                 class="data row0 col2" >
                     1.09 m
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row0_col2"
-                 class="data row0 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row0_col3"
+                 class="data row0 col3" >
                     0 m
                 
                 
@@ -12829,26 +13030,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row1" rowspan=1>
                     1
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row1_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row1_col0"
                  class="data row1 col0" >
                     Mercury
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row1_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row1_col1"
                  class="data row1 col1" >
+                    1.91 mm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row1_col2"
+                 class="data row1 col2" >
                     3.83 mm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row1_col2"
-                 class="data row1 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row1_col3"
+                 class="data row1 col3" >
                     45.39 m
                 
                 
@@ -12857,26 +13064,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row2" rowspan=1>
                     2
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row2_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row2_col0"
                  class="data row2 col0" >
                     Venus
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row2_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row2_col1"
                  class="data row2 col1" >
+                    4.74 mm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row2_col2"
+                 class="data row2 col2" >
                     9.49 mm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row2_col2"
-                 class="data row2 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row2_col3"
+                 class="data row2 col3" >
                     84.67 m
                 
                 
@@ -12885,26 +13098,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row3" rowspan=1>
                     3
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row3_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row3_col0"
                  class="data row3 col0" >
                     Earth
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row3_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row3_col1"
                  class="data row3 col1" >
+                    5.00 mm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row3_col2"
+                 class="data row3 col2" >
                     1.00 cm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row3_col2"
-                 class="data row3 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row3_col3"
+                 class="data row3 col3" >
                     117.59 m
                 
                 
@@ -12913,26 +13132,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row4" rowspan=1>
                     4
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row4_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row4_col0"
                  class="data row4 col0" >
                     Mars
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row4_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row4_col1"
                  class="data row4 col1" >
+                    2.66 mm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row4_col2"
+                 class="data row4 col2" >
                     5.33 mm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row4_col2"
-                 class="data row4 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row4_col3"
+                 class="data row4 col3" >
                     178.74 m
                 
                 
@@ -12941,26 +13166,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row5" rowspan=1>
                     5
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row5_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row5_col0"
                  class="data row5 col0" >
                     Jupiter
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row5_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row5_col1"
                  class="data row5 col1" >
+                    5.60 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row5_col2"
+                 class="data row5 col2" >
                     11.21 cm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row5_col2"
-                 class="data row5 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row5_col3"
+                 class="data row5 col3" >
                     609.91 m
                 
                 
@@ -12969,26 +13200,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row6" rowspan=1>
                     6
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row6_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row6_col0"
                  class="data row6 col0" >
                     Saturn
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row6_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row6_col1"
                  class="data row6 col1" >
+                    4.72 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row6_col2"
+                 class="data row6 col2" >
                     9.45 cm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row6_col2"
-                 class="data row6 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row6_col3"
+                 class="data row6 col3" >
                     1.12 km
                 
                 
@@ -12997,26 +13234,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row7" rowspan=1>
                     7
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row7_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row7_col0"
                  class="data row7 col0" >
                     Uranus
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row7_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row7_col1"
                  class="data row7 col1" >
+                    2.00 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row7_col2"
+                 class="data row7 col2" >
                     4.01 cm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row7_col2"
-                 class="data row7 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row7_col3"
+                 class="data row7 col3" >
                     2.25 km
                 
                 
@@ -13025,26 +13268,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row8" rowspan=1>
                     8
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row8_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row8_col0"
                  class="data row8 col0" >
                     Neptune
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row8_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row8_col1"
                  class="data row8 col1" >
+                    1.94 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row8_col2"
+                 class="data row8 col2" >
                     3.88 cm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row8_col2"
-                 class="data row8 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row8_col3"
+                 class="data row8 col3" >
                     3.53 km
                 
                 
@@ -13053,26 +13302,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row9" rowspan=1>
                     9
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row9_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row9_col0"
                  class="data row9 col0" >
                     Pluto
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row9_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row9_col1"
                  class="data row9 col1" >
+                    901.54 μm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row9_col2"
+                 class="data row9 col2" >
                     1.80 mm
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row9_col2"
-                 class="data row9 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row9_col3"
+                 class="data row9 col3" >
                     4.63 km
                 
                 
@@ -13081,26 +13336,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row10" rowspan=1>
                     10
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row10_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row10_col0"
                  class="data row10 col0" >
                     Kuiper Belt inner edge
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row10_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row10_col1"
                  class="data row10 col1" >
                     0 m
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row10_col2"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row10_col2"
                  class="data row10 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row10_col3"
+                 class="data row10 col3" >
                     3.53 km
                 
                 
@@ -13109,26 +13370,32 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row11" rowspan=1>
                     11
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row11_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row11_col0"
                  class="data row11 col0" >
                     Kuiper Belt outer edge
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row11_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row11_col1"
                  class="data row11 col1" >
                     0 m
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row11_col2"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row11_col2"
                  class="data row11 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row11_col3"
+                 class="data row11 col3" >
                     5.88 km
                 
                 
@@ -13137,27 +13404,562 @@ div#notebook {
             <tr>
                 
                 
-                <th id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3"
+                <th id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3"
                  class="row_heading level0 row12" rowspan=1>
                     12
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row12_col0"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row12_col0"
                  class="data row12 col0" >
                     Alpha Centauri
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row12_col1"
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row12_col1"
                  class="data row12 col1" >
+                    66.47 cm
+                
+                
+                
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row12_col2"
+                 class="data row12 col2" >
                     1.33 m
                 
                 
                 
-                <td id="T_5fd0ce6a_fd64_11e7_b18f_5fce9d87fcb3row12_col2"
-                 class="data row12 col2" >
+                <td id="T_73a27f1c_fdcb_11e7_b18f_5fce9d87fcb3row12_col3"
+                 class="data row12 col3" >
                     31,906.55 km
+                
+                
+            </tr>
+            
+        </tbody>
+        </table>
+        
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-if-Mars-Were-at-an-Average-Distance-of-1-m-From-the-Sun?">What if Mars Were at an Average Distance of 1 m From the Sun?<a class="anchor-link" href="#What-if-Mars-Were-at-an-Average-Distance-of-1-m-From-the-Sun?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sss_mars_distance</span> <span class="o">=</span> <span class="n">scale_solar_system</span><span class="p">(</span>
+    <span class="n">new_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;distance_from_sun&#39;</span><span class="p">,</span>
+    <span class="n">reference_object</span><span class="o">=</span><span class="s1">&#39;Mars&#39;</span>
+<span class="p">)</span>
+<span class="n">show_scaled_with_jupyter</span><span class="p">(</span><span class="n">sss_mars_distance</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+        <style  type="text/css" >
+        
+        
+        </style>
+
+        <table id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3" None>
+        
+
+        <thead>
+            
+            <tr>
+                
+                
+                <th class="blank level0" >
+                  
+                
+                
+                
+                <th class="col_heading level0 col0" colspan=1>
+                  object
+                
+                
+                
+                <th class="col_heading level0 col1" colspan=1>
+                  radius_scaled
+                
+                
+                
+                <th class="col_heading level0 col2" colspan=1>
+                  diameter_scaled
+                
+                
+                
+                <th class="col_heading level0 col3" colspan=1>
+                  distance_from_sun_scaled
+                
+                
+            </tr>
+            
+        </thead>
+        <tbody>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row0" rowspan=1>
+                    0
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row0_col0"
+                 class="data row0 col0" >
+                    Sun
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row0_col1"
+                 class="data row0 col1" >
+                    3.05 mm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row0_col2"
+                 class="data row0 col2" >
+                    6.10 mm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row0_col3"
+                 class="data row0 col3" >
+                    0 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row1" rowspan=1>
+                    1
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row1_col0"
+                 class="data row1 col0" >
+                    Mercury
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row1_col1"
+                 class="data row1 col1" >
+                    10.70 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row1_col2"
+                 class="data row1 col2" >
+                    21.40 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row1_col3"
+                 class="data row1 col3" >
+                    25.39 cm
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row2" rowspan=1>
+                    2
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row2_col0"
+                 class="data row2 col0" >
+                    Venus
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row2_col1"
+                 class="data row2 col1" >
+                    26.54 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row2_col2"
+                 class="data row2 col2" >
+                    53.09 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row2_col3"
+                 class="data row2 col3" >
+                    47.37 cm
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row3" rowspan=1>
+                    3
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row3_col0"
+                 class="data row3 col0" >
+                    Earth
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row3_col1"
+                 class="data row3 col1" >
+                    27.97 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row3_col2"
+                 class="data row3 col2" >
+                    55.95 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row3_col3"
+                 class="data row3 col3" >
+                    65.79 cm
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row4" rowspan=1>
+                    4
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row4_col0"
+                 class="data row4 col0" >
+                    Mars
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row4_col1"
+                 class="data row4 col1" >
+                    14.90 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row4_col2"
+                 class="data row4 col2" >
+                    29.80 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row4_col3"
+                 class="data row4 col3" >
+                    100.00 cm
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row5" rowspan=1>
+                    5
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row5_col0"
+                 class="data row5 col0" >
+                    Jupiter
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row5_col1"
+                 class="data row5 col1" >
+                    313.56 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row5_col2"
+                 class="data row5 col2" >
+                    627.12 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row5_col3"
+                 class="data row5 col3" >
+                    3.41 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row6" rowspan=1>
+                    6
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row6_col0"
+                 class="data row6 col0" >
+                    Saturn
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row6_col1"
+                 class="data row6 col1" >
+                    264.33 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row6_col2"
+                 class="data row6 col2" >
+                    528.67 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row6_col3"
+                 class="data row6 col3" >
+                    6.27 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row7" rowspan=1>
+                    7
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row7_col0"
+                 class="data row7 col0" >
+                    Uranus
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row7_col1"
+                 class="data row7 col1" >
+                    112.10 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row7_col2"
+                 class="data row7 col2" >
+                    224.20 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row7_col3"
+                 class="data row7 col3" >
+                    12.59 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row8" rowspan=1>
+                    8
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row8_col0"
+                 class="data row8 col0" >
+                    Neptune
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row8_col1"
+                 class="data row8 col1" >
+                    108.62 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row8_col2"
+                 class="data row8 col2" >
+                    217.25 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row8_col3"
+                 class="data row8 col3" >
+                    19.74 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row9" rowspan=1>
+                    9
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row9_col0"
+                 class="data row9 col0" >
+                    Pluto
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row9_col1"
+                 class="data row9 col1" >
+                    5.04 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row9_col2"
+                 class="data row9 col2" >
+                    10.09 μm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row9_col3"
+                 class="data row9 col3" >
+                    25.92 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row10" rowspan=1>
+                    10
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row10_col0"
+                 class="data row10 col0" >
+                    Kuiper Belt inner edge
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row10_col1"
+                 class="data row10 col1" >
+                    0 m
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row10_col2"
+                 class="data row10 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row10_col3"
+                 class="data row10 col3" >
+                    19.74 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row11" rowspan=1>
+                    11
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row11_col0"
+                 class="data row11 col0" >
+                    Kuiper Belt outer edge
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row11_col1"
+                 class="data row11 col1" >
+                    0 m
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row11_col2"
+                 class="data row11 col2" >
+                    0 m
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row11_col3"
+                 class="data row11 col3" >
+                    32.89 m
+                
+                
+            </tr>
+            
+            <tr>
+                
+                
+                <th id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3"
+                 class="row_heading level0 row12" rowspan=1>
+                    12
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row12_col0"
+                 class="data row12 col0" >
+                    Alpha Centauri
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row12_col1"
+                 class="data row12 col1" >
+                    3.72 mm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row12_col2"
+                 class="data row12 col2" >
+                    7.44 mm
+                
+                
+                
+                <td id="T_d6862480_fdcb_11e7_b18f_5fce9d87fcb3row12_col3"
+                 class="data row12 col3" >
+                    178.51 km
                 
                 
             </tr>
